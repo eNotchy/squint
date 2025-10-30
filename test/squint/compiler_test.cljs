@@ -233,6 +233,13 @@
   (is (false? (jsv! "(neg-int? :some-keyword)")))
   (is (false? (jsv! "(neg-int? [-4])"))))
 
+(deftest integer?-test
+  (is (true? (jsv! "(integer? 4)")))
+  (is (true? (jsv! "(integer? (js/BigInt 4))")))
+  (is (false? (jsv! "(integer? 0.4)")))
+  (is (false? (jsv! "(integer? :four)")))
+  (is (false? (jsv! "(integer? [4])"))))
+
 (deftest no-truth-check-test
   (let [inputs ["(if (zero? 0) 1 2)" "(when (< 1 2) 1)"
                 #_"(when (= 1 1) 1)"
